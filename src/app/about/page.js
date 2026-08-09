@@ -14,7 +14,7 @@ export default function About() {
           <p className="text-foreground/80 leading-relaxed">
             I am a passionate Full Stack Web Developer with a strong foundation in modern web technologies. 
             I love building applications that solve real-world problems and provide intuitive user experiences.
-            When I'm not coding, you can find me exploring new technologies or contributing to open-source projects.
+            When I&apos;m not coding, you can find me exploring new technologies or contributing to open-source projects.
           </p>
         </section>
 

@@ -62,7 +62,7 @@ export default function Projects() {
       <div className="text-center mb-16">
         <h1 className="text-4xl font-bold text-primary mb-4">My Projects</h1>
         <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-          Here are some of the projects I've worked on recently. They showcase my skills in frontend and backend development.
+          Here are some of the projects I&apos;ve worked on recently. They showcase my skills in frontend and backend development.
         </p>
       </div>
       
