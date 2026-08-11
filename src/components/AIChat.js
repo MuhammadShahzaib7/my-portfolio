@@ -1,20 +1,19 @@
 "use client";
 
-import { useChat } from '@ai-sdk/react';
 import { useState, useEffect, useRef } from 'react';
 import { MessageCircle, X, Send, AlertCircle, Loader2, Square } from 'lucide-react';
 
 export default function AIChat() {
   const [isOpen, setIsOpen] = useState(false);
-  const messagesEndRef = useRef(null);
-  
-  const { messages, input, handleInputChange, handleSubmit, isLoading, error, stop } = useChat({
-    api: '/api/chat',
-    onError: (err) => {
-      console.error('Chat error:', err);
-    }
-  });
+  const [localInput, setLocalInput] = useState('');
+  const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const abortControllerRef = useRef(null);
 
+  const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
+  
   // Auto-scroll to bottom of messages
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -22,20 +21,94 @@ export default function AIChat() {
     }
   }, [messages, isLoading, error]);
 
+  // Focus input when chat opens
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
+
   const toggleChat = () => setIsOpen(!isOpen);
 
-  // Parse error message safely if the API returned JSON
-  let displayError = "An unexpected error occurred.";
-  if (error) {
+  const onFormSubmit = async (e) => {
+    e.preventDefault();
+    if (!localInput.trim() || isLoading) return;
+
+    const userMessage = { id: Date.now().toString(), role: 'user', content: localInput.trim() };
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
+    setLocalInput('');
+    setIsLoading(true);
+    setError(null);
+
+    abortControllerRef.current = new AbortController();
+
     try {
-      const parsed = JSON.parse(error.message);
-      displayError = parsed.error || displayError;
-    } catch {
-      // Fallback if not JSON
-      if (error.message.includes('429')) displayError = "Too many requests. Slow down!";
-      else if (error.message.includes('400')) displayError = "Invalid request or message too long.";
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: newMessages }),
+        signal: abortControllerRef.current.signal
+      });
+
+      if (!response.ok) {
+        let errMessage = 'An unexpected error occurred.';
+        try {
+          const errData = await response.json();
+          errMessage = errData.error || errMessage;
+        } catch {
+          if (response.status === 429) errMessage = 'Too many requests. Slow down!';
+          else if (response.status === 400) errMessage = 'Invalid request or message too long.';
+        }
+        throw new Error(errMessage);
+      }
+
+      // Read the stream
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
+      let text = '';
+      
+      const assistantId = Date.now().toString() + "-ai";
+      setMessages(msgs => [...msgs, { id: assistantId, role: 'assistant', content: '' }]);
+
+      while (!done) {
+        const { value, done: readerDone } = await reader.read();
+        done = readerDone;
+        if (value) {
+          text += decoder.decode(value, { stream: true });
+          setMessages(msgs => {
+            const updated = [...msgs];
+            if (updated[updated.length - 1].id === assistantId) {
+              updated[updated.length - 1].content = text;
+            }
+            return updated;
+          });
+        }
+      }
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        console.error('Chat error:', err);
+        setError(err);
+      }
+    } finally {
+      setIsLoading(false);
+      abortControllerRef.current = null;
     }
-  }
+  };
+
+  const stop = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      setIsLoading(false);
+    }
+  };
+
+  const onInputChange = (e) => {
+    setLocalInput(e.target.value);
+  };
+
+  const displayError = error ? error.message : null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
@@ -105,12 +178,13 @@ export default function AIChat() {
           </div>
 
           {/* Input Area */}
-          <form onSubmit={handleSubmit} className="p-3 bg-secondary/50 border-t border-border">
+          <form onSubmit={onFormSubmit} className="p-3 bg-secondary/50 border-t border-border">
             <div className="flex items-center gap-2 relative">
               <input
+                ref={inputRef}
                 type="text"
-                value={input}
-                onChange={handleInputChange}
+                value={localInput}
+                onChange={onInputChange}
                 placeholder="Ask me anything..."
                 className="flex-1 bg-background border border-border rounded-full pl-4 pr-12 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground transition-shadow"
                 disabled={isLoading}
@@ -130,7 +204,7 @@ export default function AIChat() {
               ) : (
                 <button
                   type="submit"
-                  disabled={!input.trim()}
+                  disabled={localInput.trim() === ''}
                   className="absolute right-2 p-1.5 bg-primary text-primary-foreground rounded-full disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/90 transition-colors shadow-sm"
                   aria-label="Send message"
                 >
