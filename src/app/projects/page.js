@@ -8,51 +8,39 @@ export const metadata = {
 const projects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "A full-featured e-commerce platform with cart management, user authentication, and payment processing integration.",
-    technologies: ["Next.js", "Tailwind CSS", "Stripe", "MongoDB"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com"
+    title: "UI Evolution",
+    description: "AI code analysis and improvement lab that helps developers refine their user interfaces with advanced recommendations.",
+    technologies: ["React", "Next.js", "Tailwind CSS", "AI Integration"],
+    image: "/ui_evolution.png",
+    githubUrl: "https://github.com/MuhammadShahzaib7/Capstone-Project",
+    liveUrl: "https://capstone-project-hifr.vercel.app/"
   },
   {
     id: 2,
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates and drag-and-drop functionality.",
-    technologies: ["React", "Node.js", "Socket.io", "Express"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com"
+    title: "Atlas AI",
+    description: "A streaming chat AI interface providing real-time interactions, smooth UI updates, and an intuitive user experience.",
+    technologies: ["React", "Next.js", "AI SDK", "Tailwind CSS"],
+    image: "/atlas_ai.png",
+    githubUrl: "https://github.com/MuhammadShahzaib7/Streaming-AI-Chat-Interface",
+    liveUrl: "https://streaming-ai-chat-interface.vercel.app/"
   },
   {
     id: 3,
-    title: "Weather Dashboard",
-    description: "A beautiful weather dashboard providing real-time forecasts, historical data, and interactive maps.",
-    technologies: ["JavaScript", "HTML", "CSS", "OpenWeather API"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com"
+    title: "Website Analyzer Tool",
+    description: "A comprehensive tool to analyze website performance, SEO metrics, and accessibility scores instantly.",
+    technologies: ["JavaScript", "React", "Performance APIs"],
+    image: "/website_analyzer.png",
+    githubUrl: "https://github.com/MuhammadShahzaib7/WebsiteAnalyzerTool",
+    liveUrl: "https://website-analyzer-tool-two.vercel.app/"
   },
   {
     id: 4,
-    title: "Personal Blog",
-    description: "A static blog generated with markdown content, featuring dark mode and SEO optimization.",
-    technologies: ["Next.js", "Tailwind CSS", "MDX"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com"
-  },
-  {
-    id: 5,
-    title: "Fitness Tracker",
-    description: "A mobile-responsive web app to track workouts, monitor progress, and visualize data with charts.",
-    technologies: ["React", "Chart.js", "Firebase"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com"
-  },
-  {
-    id: 6,
-    title: "Recipe Finder",
-    description: "An application to discover recipes based on available ingredients, complete with dietary filters.",
-    technologies: ["Vue.js", "Tailwind CSS", "Spoonacular API"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com"
+    title: "Nexus Quantum",
+    description: "A visually stunning modern website showcasing high-quality 3D models with interactive 3D rendering capabilities.",
+    technologies: ["React", "Three.js", "Tailwind CSS"],
+    image: "/nexus_quantum.png",
+    githubUrl: "https://github.com/MuhammadShahzaib7/3D-Model-Web",
+    liveUrl: "https://3-d-model-web-rho.vercel.app/"
   }
 ];
 

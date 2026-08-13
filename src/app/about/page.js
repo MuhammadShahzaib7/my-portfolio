@@ -33,14 +33,14 @@ export default function About() {
           <h2 className="text-2xl font-semibold mb-6 text-foreground">Experience</h2>
           <div className="border-l-2 border-primary/30 pl-6 space-y-8">
             <div>
-              <h3 className="text-xl font-medium text-primary">Frontend Developer</h3>
-              <p className="text-foreground/60 text-sm mb-2">Tech Company Inc. • 2022 - Present</p>
-              <p className="text-foreground/80">Developed and maintained responsive web applications using React and Next.js. Improved performance and accessibility across all company products.</p>
+              <h3 className="text-xl font-medium text-primary">Frontend Engineering Intern</h3>
+              <p className="text-foreground/60 text-sm mb-2">Flyrank • June 2026 - Present</p>
+              <p className="text-foreground/80">Working on frontend engineering tasks, developing and maintaining responsive web applications.</p>
             </div>
             <div>
-              <h3 className="text-xl font-medium text-primary">Web Development Intern</h3>
-              <p className="text-foreground/60 text-sm mb-2">Startup LLC • Summer 2021</p>
-              <p className="text-foreground/80">Assisted in building UI components and integrating RESTful APIs for the main customer dashboard.</p>
+              <h3 className="text-xl font-medium text-primary">React Developer</h3>
+              <p className="text-foreground/60 text-sm mb-2">Alberuni Tech • Feb 2026 - April 2026</p>
+              <p className="text-foreground/80">Developed UI components and integrated features using React and modern frontend technologies.</p>
             </div>
           </div>
         </section>
