@@ -63,7 +63,7 @@ export default function About() {
           LinkedIn Profile
         </a>
         <a 
-          href="/cv.pdf" 
+          href="/CV.pdf" 
           target="_blank" 
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center px-8 py-3 bg-card border border-border text-foreground font-medium rounded-lg hover:bg-muted transition-colors shadow-sm"
