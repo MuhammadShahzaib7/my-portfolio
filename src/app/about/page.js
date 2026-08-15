@@ -52,6 +52,25 @@ export default function About() {
           </p>
         </section>
       </div>
+
+      <div className="mt-12 flex flex-col sm:flex-row justify-center gap-6">
+        <a 
+          href="https://www.linkedin.com/in/muhammad-shahzaib-983ba2266" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
+        >
+          LinkedIn Profile
+        </a>
+        <a 
+          href="/cv.pdf" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center px-8 py-3 bg-card border border-border text-foreground font-medium rounded-lg hover:bg-muted transition-colors shadow-sm"
+        >
+          View CV
+        </a>
+      </div>
     </div>
   );
 }
