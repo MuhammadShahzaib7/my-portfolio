@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://shahzaib-developer-portfolio.vercel.app/"),
   title: "Muhammad Shahzaib | Full Stack Web Developer",
   description: "Full Stack Developer specializing in React, Next.js, Node.js and MongoDB. View my projects, GitHub, and get in touch.",
   openGraph: {

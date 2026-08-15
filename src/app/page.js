@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
 import dynamic from "next/dynamic";
 
-const ShaderHero = dynamic(() => import("@/components/ShaderHero/ShaderHero"), { ssr: false });
+const ShaderHero = dynamic(() => import("@/components/ShaderHero/ShaderHero"));
 
 export default function Home() {
   return (
