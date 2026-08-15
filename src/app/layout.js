@@ -16,8 +16,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "My Portfolio | Full Stack Developer",
-  description: "Modern portfolio built with Next.js and Tailwind CSS",
+  title: "Muhammad Shahzaib | Full Stack Web Developer",
+  description: "Full Stack Developer specializing in React, Next.js, Node.js and MongoDB. View my projects, GitHub, and get in touch.",
+  openGraph: {
+    title: "Muhammad Shahzaib | Full Stack Web Developer",
+    description: "Full Stack Developer building modern web experiences with React, Next.js, and Node.js.",
+    url: "https://shahzaib-developer-portfolio.vercel.app/",
+    siteName: "Muhammad Shahzaib Portfolio",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Muhammad Shahzaib | Full Stack Web Developer",
+    description: "Full Stack Developer building modern web experiences.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({ children }) {
