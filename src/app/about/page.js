@@ -22,9 +22,9 @@ export default function About() {
           <h2 className="text-2xl font-semibold mb-6 text-foreground">Education</h2>
           <div className="border-l-2 border-primary/30 pl-6 space-y-6">
             <div>
-              <h3 className="text-xl font-medium text-primary">B.S. Computer Science</h3>
-              <p className="text-foreground/60 text-sm mb-2">University Name • 2018 - 2022</p>
-              <p className="text-foreground/80">Focused on software engineering, web development, and algorithms.</p>
+              <h3 className="text-xl font-medium text-primary">BS IT</h3>
+              <p className="text-foreground/60 text-sm mb-2">Numl • 2023 - 2027</p>
+              <p className="text-foreground/80">Focused on IT related subjects and web development.</p>
             </div>
           </div>
         </section>
@@ -38,7 +38,7 @@ export default function About() {
               <p className="text-foreground/80">Working on frontend engineering tasks, developing and maintaining responsive web applications.</p>
             </div>
             <div>
-              <h3 className="text-xl font-medium text-primary">React Developer</h3>
+              <h3 className="text-xl font-medium text-primary">React Intern</h3>
               <p className="text-foreground/60 text-sm mb-2">Alberuni Tech • Feb 2026 - April 2026</p>
               <p className="text-foreground/80">Developed UI components and integrated features using React and modern frontend technologies.</p>
             </div>
