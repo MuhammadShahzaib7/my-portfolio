@@ -20,12 +20,64 @@ export default function ContactForm() {
     const form = e.target;
     const formData = new FormData(form);
     
-    // Simulate a network request
-    setTimeout(() => {
-      setSubmitStatus("success");
-      form.reset();
+    // Client-side validation
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const subject = formData.get("subject");
+    const message = formData.get("message");
+
+    if (!name || !email || !subject || !message) {
+      setErrorMessage("Please fill in all required fields.");
+      setSubmitStatus("error");
       setIsSubmitting(false);
-    }, 1500);
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrorMessage("Please enter a valid email address.");
+      setSubmitStatus("error");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+      
+      if (!endpoint || endpoint === "FORMSPREE_ENDPOINT") {
+        throw new Error("Form submission is currently unavailable. (Missing Formspree endpoint)");
+      }
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        form.reset();
+      } else {
+        let errorMsg = "Oops! There was a problem submitting your form.";
+        try {
+          const data = await response.json();
+          if (Object.hasOwn(data, "errors")) {
+            errorMsg = data["errors"].map((error) => error["message"]).join(", ");
+          }
+        } catch (e) {
+          // Ignore JSON parse errors if the response is not JSON
+        }
+        setErrorMessage(errorMsg);
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      setErrorMessage(error.message || "Oops! There was a problem submitting your form.");
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
